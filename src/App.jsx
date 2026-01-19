@@ -22,6 +22,7 @@ import {
   Award,
   Download,
 } from 'lucide-react';
+import Tonny from '../public/tonny.jpg'
 
 // --- Custom CSS for Animations ---
 const customStyles = `
@@ -118,9 +119,7 @@ const Navigation = ({
             onClick={() => setActiveTab('home')}
           >
             <span className="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
-              {/* <img src="" className="bg-slate-950/80" alt="" /> */}
-              LT
-              <span className="text-blue-500">.</span>
+              <img src={Tonny} className="w-[30px] h-[30px] object-cover rounded-full" />              
             </span>
           </div>
 
@@ -278,8 +277,8 @@ const About = () => {
             <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
             <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-slate-900 relative z-10 border border-slate-800 shadow-2xl">
               <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-900 text-slate-600">
-                <div className="w-32 h-32 mb-6 bg-slate-800 rounded-full flex items-center justify-center text-4xl font-bold text-blue-500 shadow-inner">
-                  TL
+                <div className=" mb-20 w-70 h-70 rounded-full mb-6 bg-slate-800  flex items-center justify-center text-4xl font-bold text-blue-500 shadow-inner">
+                  <img  src={Tonny} className='rounded-full object-cover w-70 h-70'/>
                 </div>
                 <p className="text-sm font-medium px-8 text-center">
                   "I combine technical development skills with experience in
