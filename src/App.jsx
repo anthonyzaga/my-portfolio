@@ -204,8 +204,8 @@ const Hero = ({ setActiveTab }) => {
         </div>
 
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight">
-          Tonny <br className="md:hidden" />
-          <span className="text-gradient">Luyimbaazi</span>
+        Luyimbaazi <br className="md:hidden" />
+          <span className="text-gradient">Tonny</span>
         </h1>
 
         <div className="h-8 md:h-12 mb-6 text-xl md:text-3xl text-slate-300 font-light">
@@ -318,7 +318,7 @@ const About = () => {
             <div className="prose prose-lg prose-invert text-slate-300">
               <p>
                 Hello! I'm{' '}
-                <strong className="text-white">Tonny Luyimbaazi</strong>, a
+                <strong className="text-white">Luyimbaazi Tonny</strong>, a
                 driven Software Development student based in Masaka, Uganda.
               </p>
               <p>
