@@ -677,137 +677,95 @@ const Projects = () => {
 };
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [result, setResult] = React.useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 3000);
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    setResult("Sending...");
+    const formData = new FormData(event.target);
+
+    // INSERT YOUR ACCESS KEY HERE
+    formData.append("access_key", "3a21b51d-9fe8-4b60-8744-611e7189f16e");
+
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      setResult("Message Sent Successfully! ✅");
+      event.target.reset();
+    } else {
+      console.log("Error", data);
+      setResult(data.message);
+    }
   };
 
   return (
-    <PageTransition className="min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex items-center">
-      <div className="w-full grid lg:grid-cols-2 gap-16">
-        <div>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Let's <span className="text-gradient">Collaborate</span>
-          </h2>
-          <p className="text-slate-300 text-lg mb-10 leading-relaxed">
-            I'm currently available for freelance work and internship
-            opportunities. Whether you need a modern website, a system for your
-            business, or high-end photo editing, let's create something amazing
-            together.
-          </p>
+    <PageTransition className="min-h-screen pt-24 pb-12 px-6 max-w-4xl mx-auto flex flex-col justify-center">
+      <div className="text-center mb-12">
+        <h2 className="text-4xl font-bold text-white">Get In <span className="text-gradient">Touch</span></h2>
+        <p className="text-slate-400 mt-4">Have a project in mind? Let's build it together.</p>
+      </div>
 
-          <div className="space-y-6">
-            <div className="flex items-center gap-4 group">
-              <div className="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center group-hover:bg-blue-600 transition-colors">
-                <Mail className="text-blue-500 group-hover:text-white" />
-              </div>
-              <div>
-                <div className="text-sm text-slate-500">Email</div>
-                <a
-                  href="mailto:tonnyluyimbaazi6@gmail.com"
-                  className="text-lg text-white font-medium hover:text-blue-400 transition-colors"
-                >
-                  tonnyluyimbaazi6@gmail.com
-                </a>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4 group">
-              <div className="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center group-hover:bg-purple-600 transition-colors">
-                <MapPin className="text-purple-500 group-hover:text-white" />
-              </div>
-              <div>
-                <div className="text-sm text-slate-500">Location</div>
-                <div className="text-lg text-white font-medium">
-                  Masaka, Uganda
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-8 flex gap-4">
-              <a
-                href="#"
-                className="w-12 h-12 bg-slate-900 border border-slate-700 rounded-full flex items-center justify-center text-slate-400 hover:text-white hover:border-blue-500 hover:bg-blue-600/20 transition-all hover:-translate-y-1"
-              >
-                <Linkedin size={20} />
-              </a>
-              <a
-                href="#"
-                className="w-12 h-12 bg-slate-900 border border-slate-700 rounded-full flex items-center justify-center text-slate-400 hover:text-white hover:border-gray-500 hover:bg-gray-700/20 transition-all hover:-translate-y-1"
-              >
-                <Github size={20} />
-              </a>
-            </div>
+      <div className="grid md:grid-cols-2 gap-8">
+        {/* Contact Info */}
+        <div className="space-y-6">
+          <div className="glass-card p-6 rounded-2xl border border-slate-800">
+             <div className="flex items-center gap-4">
+               <div className="p-3 bg-blue-500/10 rounded-lg text-blue-400"><Mail size={24}/></div>
+               <div>
+                 <p className="text-slate-400 text-sm">Email Me</p>
+                 <p className="text-white font-medium">tonnyluyimbaazi6@gmail.com</p>
+               </div>
+             </div>
+          </div>
+          <div className="glass-card p-6 rounded-2xl border border-slate-800">
+             <div className="flex items-center gap-4">
+               <div className="p-3 bg-purple-500/10 rounded-lg text-purple-400"><MapPin size={24}/></div>
+               <div>
+                 <p className="text-slate-400 text-sm">Location</p>
+                 <p className="text-white font-medium">Masaka, Uganda</p>
+               </div>
+             </div>
           </div>
         </div>
 
-        <div className="glass-card p-8 rounded-3xl border border-slate-700 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/20 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
-
-          <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
-            <div className="grid grid-cols-2 gap-6">
-              <div className="col-span-2 sm:col-span-1">
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-slate-400 mb-2"
-                >
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  className="w-full bg-slate-950/50 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
-                  placeholder="John Doe"
-                  required
-                />
-              </div>
-              <div className="col-span-2 sm:col-span-1">
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-slate-400 mb-2"
-                >
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  className="w-full bg-slate-950/50 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
-                  placeholder="hello@example.com"
-                  required
-                />
-              </div>
-            </div>
-            <div>
-              <label
-                htmlFor="message"
-                className="block text-sm font-medium text-slate-400 mb-2"
-              >
-                Message
-              </label>
-              <textarea
-                id="message"
-                rows={4}
-                className="w-full bg-slate-950/50 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
-                placeholder="Tell me about your project..."
-                required
-              ></textarea>
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-blue-900/20 transform hover:-translate-y-1 transition-all duration-300"
-            >
-              {isSubmitted ? 'Message Sent!' : 'Send Message'}
-            </button>
-          </form>
-        </div>
+        {/* Contact Form */}
+        <form onSubmit={onSubmit} className="glass-card p-8 rounded-3xl border border-slate-700 space-y-4">
+          <input 
+            type="text" 
+            name="name" 
+            placeholder="Your Name" 
+            required 
+            className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
+          />
+          <input 
+            type="email" 
+            name="email" 
+            placeholder="Your Email" 
+            required 
+            className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
+          />
+          <textarea 
+            name="message" 
+            rows="4" 
+            placeholder="Your Message" 
+            required 
+            className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
+          ></textarea>
+          
+          <button 
+            type="submit" 
+            className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-900/20"
+          >
+            Send Message
+          </button>
+          
+          {result && <p className="text-center text-sm text-blue-400 animate-pulse mt-2">{result}</p>}
+        </form>
       </div>
     </PageTransition>
   );
